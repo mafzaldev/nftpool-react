@@ -1,0 +1,127 @@
+.profile-container {
+    padding: 10px 100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.profile {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+
+}
+
+.personal-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    gap: 8px;
+}
+
+.personal-info img {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+}
+
+.account-info {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 15px;
+}
+
+.account-info .detail {
+    width: 130px;
+    height: 90px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #2029348d;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+}
+
+.account-info .detail .field {
+    font-weight: 600;
+    font-size: 12px;
+    text-transform: uppercase;
+    opacity: 0.2;
+}
+
+.account-info .detail .value {
+    font-family: "Clash Display";
+    font-weight: 500;
+}
+
+
+.portfolio {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.portfolio h3 {
+    font-family: "Inter";
+    text-transform: uppercase;
+    font-weight: 700;
+    letter-spacing: 4px;
+}
+
+.portfolio-showcase {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.portfolio-showcase img {
+    width: 50%;
+    height: 90%;
+}
+
+@media (max-width: 480px) {
+    .profile-container {
+        padding: 10px 0px;
+        grid-template-columns: 1fr;
+        gap: 30px;
+
+    }
+
+    .profile {
+        gap: 25px;
+    }
+
+    .account-info {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 30px;
+    }
+
+    .portfolio {
+        align-items: center;
+        gap: 30px;
+    }
+
+    .portfolio h3 {
+        font-weight: 600;
+    }
+
+    .portfolio-showcase {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 30px;
+    }
+
+    .portfolio-showcase img {
+        width: 80%;
+        height: 100%;
+    }
+}

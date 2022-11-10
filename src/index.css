@@ -1,0 +1,14 @@
+@import url("https://fonts.cdnfonts.com/css/clash-display");
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+
+:root {
+  --primary-color: #11002b;
+  --secondary-color: #d331bb;
+  --tertiary-color: #fff;
+  --paragraph-color: #c9bfd8;
+  --bold-color: #0fdfe5;
+  --counter-bg: #ffffff1a;
+  --divider-color: #c9bfd84d;
+  --blurred-bg: #ffffff4d;
+}

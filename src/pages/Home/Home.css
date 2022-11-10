@@ -1,0 +1,75 @@
+.hero {
+    display: flex;
+    padding: 40px 100px;
+}
+
+.hero .main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    justify-content: flex-start;
+    gap: 35px;
+    width: 50%;
+}
+
+.hero .main-content .cra {
+    margin-top: 20px;
+}
+
+.hero .main-content .counter {
+    display: flex;
+    justify-content: center;
+    width: 400px;
+    height: 100px;
+    margin-top: 35px;
+    background-color: var(--counter-bg);
+}
+
+.hero .main-content .counter .counter-item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 33%;
+    margin: 20px 0;
+}
+
+.hero .main-content .counter .counter-item:not(:first-child) {
+    border-left: 0.5px solid var(--divider-color);
+}
+
+.hero .main-image {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 50%;
+}
+
+.hero .main-image img {
+    position: absolute;
+    top: 145px;
+    width: 300px;
+}
+
+.hero .main-content h1 {
+    font-family: "Clash Display";
+    font-style: normal;
+    font-weight: 600;
+    font-size: 81px;
+    line-height: 80px;
+}
+
+.hero .main-content p {
+    font-family: "Inter", sans-serif;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 28px;
+}
+
+.hero .main-content .counter .counter-item .value {
+    font-family: "Clash Display";
+    font-size: 20px;
+    font-weight: 600;
+    text-align: left;
+}
