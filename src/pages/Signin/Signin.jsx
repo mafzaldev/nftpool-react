@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Button from "../../components/Button/Button";
+import "./Signin.css";
 
 const Signin = () => {
   const [credentials, setCredentials] = useState({
@@ -19,7 +20,7 @@ const Signin = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container signin-con">
       <h3>Sign in to NFTPool</h3>
       <div className="form-container">
         <form onSubmit={handleSubmit}>

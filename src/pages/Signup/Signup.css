@@ -1,0 +1,16 @@
+.signup-con {
+    margin-top: 5vh;
+}
+
+.row {
+    display: flex;
+    gap: 10px;
+}
+
+.row>input {
+    max-width: 170px;
+}
+
+.other-options>div>a {
+    width: 170px !important;
+}

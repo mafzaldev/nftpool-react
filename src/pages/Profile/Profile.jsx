@@ -9,43 +9,43 @@ const Profile = () => {
   return (
     <>
       <Navbar />
-      <div class="profile-container">
-        <div class="profile">
-          <div class="personal-info">
+      <div className="profile-container">
+        <div className="profile">
+          <div className="personal-info">
             <img src={PFPDemo} alt="" />
-            <span class="name">Adéwalé Rezim</span>
-            <span class="balance">34456.323442234 ETH</span>
+            <span className="name">Adéwalé Rezim</span>
+            <span className="balance">34456.323442234 ETH</span>
           </div>
-          <div class="account-info">
-            <div class="detail">
-              <span class="field">Role</span>
-              <span class="value">Designer</span>
+          <div className="account-info">
+            <div className="detail">
+              <span className="field">Role</span>
+              <span className="value">Designer</span>
             </div>
-            <div class="detail">
-              <span class="field">Transactions</span>
-              <span class="value">19</span>
+            <div className="detail">
+              <span className="field">Transactions</span>
+              <span className="value">19</span>
             </div>
-            <div class="detail">
-              <span class="field">Collection</span>
-              <span class="value">9 Pcs</span>
+            <div className="detail">
+              <span className="field">Collection</span>
+              <span className="value">9 Pcs</span>
             </div>
-            <div class="detail">
-              <span class="field">Phone</span>
-              <span class="value">546-788-965</span>
+            <div className="detail">
+              <span className="field">Phone</span>
+              <span className="value">546-788-965</span>
             </div>
-            <div class="detail">
-              <span class="field">Date of Birth</span>
-              <span class="value">28-12-90</span>
+            <div className="detail">
+              <span className="field">Date of Birth</span>
+              <span className="value">28-12-90</span>
             </div>
-            <div class="detail">
-              <span class="field">Wallet</span>
-              <span class="value">Metamask</span>
+            <div className="detail">
+              <span className="field">Wallet</span>
+              <span className="value">Metamask</span>
             </div>
           </div>
         </div>
-        <div class="portfolio">
+        <div className="portfolio">
           <h3>Portfolio</h3>
-          <div class="portfolio-showcase">
+          <div className="portfolio-showcase">
             <img src={Sample01} alt="" />
             <img src={Sample02} alt="" />
           </div>
