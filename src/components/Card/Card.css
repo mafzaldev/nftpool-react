@@ -1,0 +1,107 @@
+.card {
+  position: relative;
+  width: 370px;
+  height: 550px;
+  cursor: pointer;
+  transition: all 0.3s;
+  margin-bottom: 60px;
+}
+
+.card .upload {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+
+  font-family: "Clash Display";
+  font-size: 16px;
+  font-weight: 600;
+  margin-left: 5px;
+  color: var(--bold-color);
+
+  height: 50px;
+  width: 150px;
+  top: 5%;
+  left: 55%;
+  background: var(--blurred-bg);
+  backdrop-filter: blur(25.2px);
+}
+
+.card .upload .upload-time {
+  margin-left: 5px;
+  font-family: "Clash Display";
+  font-weight: 600;
+  font-size: 16px;
+}
+
+.card .blurred {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: absolute;
+
+  top: 400px;
+  height: 170px;
+  width: 370px;
+  backdrop-filter: blur(25.2px);
+}
+
+.card .blurred .nft-details {
+  display: flex;
+  justify-content: space-around;
+}
+
+.card .blurred .nft-details .introd .nft-name {
+  font-family: "Clash Display";
+  font-weight: 600;
+  font-size: 20px;
+  text-align: left;
+}
+
+.card .blurred .nft-details .introd .underlined {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 16px;
+  text-decoration: underline;
+  text-align: left;
+  margin-top: 5px;
+}
+
+.card .blurred .nft-details .price .crypto {
+  font-family: "Clash Display";
+  font-weight: 600;
+  font-size: 28px;
+  color: var(--bold-color);
+  text-align: right;
+}
+
+.card .blurred .nft-details .price .dollars {
+  font-family: "Inter";
+  font-weight: 500;
+  font-size: 16px;
+  text-align: right;
+}
+
+.card .blurred .card-buttons {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 5px;
+}
+
+.card .blurred .card-buttons .bid {
+  margin-top: 20px;
+  margin-left: -10px;
+}
+
+.card .blurred .card-buttons .artwork {
+  margin-top: 20px;
+  margin-right: -10px;
+}
+
+.card:hover {
+  transform: scale(1.04);
+  box-shadow: rgba(240, 46, 170, 0.4) 5px 10px, rgba(240, 46, 170, 0.3) 10px 20px;
+}
+
+@media (max-width: 480px) {}
