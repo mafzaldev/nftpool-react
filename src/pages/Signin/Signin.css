@@ -6,6 +6,9 @@
     margin-top: 5px !important;
 }
 
-.other-options a {
+.other-options button {
     width: 350px !important;
+    background-color: white;
+    color: black;
+    font-weight: bold;
 }

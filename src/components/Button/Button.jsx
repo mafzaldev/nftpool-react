@@ -1,8 +1,8 @@
 import React from "react";
 import "./Button.css";
-export default function Button({ text, width, height }) {
+export default function Button({ text, width, height, onClick }) {
   return (
-    <button href="#/" style={{ width: width, height: height }}>
+    <button onClick={onClick} href="#/" style={{ width: width, height: height }}>
       {text}
     </button>
   );

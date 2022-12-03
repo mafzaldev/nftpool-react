@@ -1,8 +1,16 @@
+import { createUserWithEmailAndPassword } from "firebase/auth";
 import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../firebase";
 import Button from "../../components/Button/Button";
+import { addUser } from "../../store/user/userSlice";
 import "./Signup.css";
 
 const Signup = () => {
+  const dispatch = useDispatch()
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
     fname: "",
     lname: "",
@@ -23,7 +31,18 @@ const Signup = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     if (credentials.password === credentials.confirmPassword) {
-      console.log(credentials);
+      createUserWithEmailAndPassword(auth, credentials.email, credentials.password).then(result => {
+        dispatch(addUser({ 
+          firstName: credentials.fname,
+          lastName: credentials.lname,
+          dob: credentials.dob,
+          phone: credentials.phone,
+          role: credentials.role,
+          uid: result.user.uid
+
+         }))
+        navigate('/profile')
+      })
     } else {
       alert("Invalid: Password and Confirm password field should be same!");
     }
@@ -122,7 +141,7 @@ const Signup = () => {
       <div className="footer">
         Already have an account?
         <span>
-          <a href="/signin">Sign In</a>
+          <Link href="/signin">Sign In</Link>
         </span>
       </div>
     </div>

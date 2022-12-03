@@ -7,6 +7,7 @@ import { NavLink } from "react-router-dom";
 import "./Navbar.css";
 
 const Navbar = () => {
+
   return (
     <nav>
       <input type="checkbox" id="check" />
@@ -25,7 +26,9 @@ const Navbar = () => {
         <img src={Close} alt="" className="close" />
       </label>
       <div className="register">
-        <Button text={"Register"} width={"150px"} height={"50px"} />
+        <NavLink to="/signup">
+          <Button text={"Register"} width={"150px"} height={"50px"} />
+        </NavLink>
       </div>
     </nav>
   );

@@ -1,13 +1,27 @@
 import React, { useState } from "react";
+import { auth, googleProvider, emailProvider, facebookProvider } from '../../../firebase'
+import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
 import Button from "../../components/Button/Button";
 import "./Signin.css";
+import { useNavigate } from "react-router-dom";
+import { useDispatch } from "react-redux";
+import { fetchUser } from "../../store/user/userSlice";
+import { Link } from "react-router-dom";
 
 const Signin = () => {
+  const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
-
+  const signIn = (provider) => {
+    signInWithPopup(auth, provider).catch(alert)
+      .then(result => {
+        dispatch(fetchUser({ photoURL: result.user.photoURL, uid: result.user.uid, email: result.user.email }))
+        navigate('/')
+      })
+  }
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -16,7 +30,12 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(credentials);
+    signInWithEmailAndPassword(auth, credentials.email, credentials.password)
+      .then(result => {
+        dispatch(fetchUser({ photoURL: result.user.photoURL, uid: result.user.uid }))
+        navigate('/')
+      })
+
   };
 
   return (
@@ -46,14 +65,14 @@ const Signin = () => {
         </form>
         <div className="other-options">
           <span>or continue with</span>
-          <a href="">Google</a>
-          <a href="">Facebook</a>
+          <Button onClick={() => signIn(googleProvider)} text="Google" />
+          <Button onClick={() => signIn(facebookProvider)} text="Facebook" />
         </div>
       </div>
       <div className="footer">
         Already have an account?
         <span>
-          <a href="/signup">Sign Up</a>
+          <Link href="/signup">Sign Up</Link>
         </span>
       </div>
     </div>
