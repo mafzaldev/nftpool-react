@@ -1,0 +1,76 @@
+.explore {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0px 100px;
+}
+
+.explore .header {
+    padding: 20px 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.explore .header .heading {
+    display: flex;
+    align-items: center;
+}
+
+.explore .header .heading h1 {
+    font-family: "Clash Display";
+    font-size: 45px;
+    margin: 0 10px;
+}
+
+.explore .header .filters {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin: 30px 0;
+}
+
+.explore .nfts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+    grid-gap: 19px;
+}
+
+@media (max-width: 480px) {
+    .explore {
+        padding: 0px 18px !important;
+    }
+
+    .explore .header .heading h1 {
+        font-size: 22px !important;
+        font-weight: 500;
+        margin: 0 10px;
+    }
+
+    .explore .filters {
+        flex-direction: column !important;
+        width: 100% !important;
+        gap: 10px;
+        margin: 30px 0;
+    }
+
+    .explore .filters .filter,
+    .explore .filters .filter-selected {
+        width: 100% !important;
+    }
+
+    .explore .nfts-grid .card {
+        width: 100% !important;
+    }
+
+    .explore .nfts-grid .card .blurred {
+        width: 100% !important;
+    }
+
+    .explore .nfts-grid {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+}

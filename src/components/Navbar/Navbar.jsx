@@ -17,9 +17,9 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="nav-links">
-        <a href="#/">Marketplace</a>
-        <a href="#/">Artists</a>
-        <a href="#/">Commmunity</a>
+        <NavLink to="/marketplace">Marketplace</NavLink>
+        <NavLink to="#/">Artists</NavLink>
+        <NavLink to="#/">Commmunity</NavLink>
       </div>
       <label className="ham-burger" htmlFor="check">
         <img src={Nav} alt="" className="ham" />

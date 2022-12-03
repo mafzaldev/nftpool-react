@@ -16,7 +16,6 @@ body {
   color: var(--paragraph-color);
 }
 
-
 /* SignUp/Signin Styling */
 .container {
   display: flex;
@@ -125,50 +124,34 @@ input {
     font-size: 40px !important;
     line-height: 40px !important;
   }
-}
 
-@media (max-width: 480px) {
   .hero .main-content p {
     font-size: 12px !important;
   }
-}
 
-@media (max-width: 480px) {
   .hero .main-content {
     width: 100% !important;
   }
-}
 
-@media (max-width: 480px) {
   .hero .counter .counter-item {
     margin: 20px;
   }
-}
 
-.hero .counter .counter-item .value {
-  font-size: 10px;
-  text-align: left;
-}
-
-@media (max-width: 480px) {
   .hero .counter {
     height: 50% !important;
     width: 100% !important;
   }
-}
 
-@media (max-width: 480px) {
   .hero .main-image img {
     display: none;
   }
-}
 
-@media (max-width: 480px) {
   .hero {
     padding: 40px 18px !important;
     flex-direction: column !important;
   }
 }
+
 
 @media (max-width: 480px) {
   .steps .steps-row {
@@ -280,47 +263,6 @@ input {
 
 @media (max-width: 480px) {
   .partners {
-    padding: 40px 18px !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .explore .filters {
-    flex-direction: column !important;
-    width: 100% !important;
-    gap: 10px;
-    margin: 30px 0;
-  }
-}
-
-@media (max-width: 480px) {
-
-  .explore .filters .filter,
-  .explore .filters .filter-selected {
-    width: 100% !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .explore .nfts-grid .card {
-    width: 100% !important;
-  }
-
-  .explore .nfts-grid .card .blurred {
-    width: 100% !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .explore .nfts-grid {
-    display: flex !important;
-    flex-direction: column;
-    align-items: center;
-  }
-}
-
-@media (max-width: 480px) {
-  .explore {
     padding: 40px 18px !important;
   }
 }
