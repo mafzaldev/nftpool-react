@@ -54,6 +54,7 @@ nav #check {
     width: 3rem;
     height: 3rem;
     border-radius: 50%;
+    cursor: pointer;
 }
 
 @media (max-width: 500px) {

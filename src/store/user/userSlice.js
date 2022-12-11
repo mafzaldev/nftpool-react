@@ -18,6 +18,7 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (userInfo) => 
   }
   const response = await axios.get("http://localhost:3000/user", { params: {uid: userInfo.uid} })
   return {...response.data[0], ...userInfo}
+
 })
 
 export const addUser = createAsyncThunk('user/addUser', async (userInfo) => {

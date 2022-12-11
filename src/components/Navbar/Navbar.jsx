@@ -25,7 +25,7 @@ const Navbar = () => {
       </div>
       <div className="nav-links">
         <NavLink to="/market">Marketplace</NavLink>
-        <NavLink to="/profile">Artists</NavLink>
+        <NavLink to="#">Artists</NavLink>
         <NavLink to="#/">Commmunity</NavLink>
       </div>
       <label className="ham-burger" htmlFor="check">
@@ -42,8 +42,13 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="register">
+              <NavLink to="/profile">
+              <img className="img-profile" src={user?.photoURL }>
+              </img>
+              </NavLink>
+    
              
-              <img className="img-profile" src={user?.photoURL }></img>
+              
  
                   <Button text={"Logout"} onClick={()=>{
                   signOut(auth);
