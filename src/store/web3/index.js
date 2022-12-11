@@ -10,6 +10,7 @@ const initialState = {
 const NETWORK_ID = import.meta.env.VITE_PUBLIC_NETWORK_ID
 export const initWeb3State = createAsyncThunk('web3/initWeb3State', async (name) => {
   const provider = new ethers.providers.Web3Provider(window.ethereum)
+  await provider.send('eth_requestAccounts', []);
   const res = fetch(`/contracts/${name}.json`)
   const contractJson = await (await res).json();
   if (contractJson.networks[NETWORK_ID].address) {

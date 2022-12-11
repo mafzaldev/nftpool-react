@@ -24,12 +24,19 @@ const removeGlobalListeners = (ethereum) => {
 const Web3Provider = ({ children }) => {
     const web3Api = useSelector(state => state.web3Api);
     const dispatch = useDispatch();
+    const testNftInfo = async () => {
+        const { contract } = web3Api
+        console.log(await contract.name())
+        console.log(await contract.symbol())
+    }
+    if(web3Api.contract){
+        testNftInfo()
+    }
     useEffect(() => {
         async function initWeb3() {
             try {
                 dispatch(initWeb3State("NftMarketplace"));
                 setTimeout(() => setGlobalListeners(window.ethereum), 500);
-                //setTimeout(() => console.log(web3Api), 1000);
             } catch (e) {
                 alert("Please, install web3 wallet");
             }
