@@ -1,5 +1,5 @@
 import { initializeApp, getApps, getApp } from 'firebase/app';
-import {enableIndexedDbPersistence, getFirestore} from 'firebase/firestore'
+import { getFirestore } from 'firebase/firestore'
 
 import { GoogleAuthProvider, getAuth, EmailAuthProvider, FacebookAuthProvider } from 'firebase/auth';
 const firebaseConfig = {

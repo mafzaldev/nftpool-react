@@ -3,6 +3,7 @@ import React from "react";
 import Heart from "../../assets/SVGs/Heart.svg";
 import Favourite from "../../assets/SVGs/Favourite.svg";
 import "./Card.css";
+import Button from "../Button/Button";
 export default function Card({
   nftImage,
   uploadDate,
@@ -33,17 +34,17 @@ export default function Card({
               <p className="dollars">{dollarValue}</p>
             </div>
           </div>
-          {/* <div className="card-buttons">
+          <div className="card-buttons">
             <div className="bid">
-              <Button text={"Place A bid"} styleClass={"bid-button button"} />
+              <Button text={"Place A bid"} width="100px" />
             </div>
             <div className="artwork">
               <Button
                 text={"View Artwork"}
-                styleClass={"artwork-button button"}
+                width="120px" 
               />
             </div>
-          </div> */}
+          </div>
         </div>
       </div>
     </div>

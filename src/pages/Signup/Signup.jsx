@@ -139,9 +139,10 @@ const Signup = () => {
         </div>
       </div>
       <div className="footer">
-        Already have an account?
+
+      Already have an account?
         <span>
-          <Link href="/signin">Sign In</Link>
+          <Link to="/signin">Sign In</Link>
         </span>
       </div>
     </div>

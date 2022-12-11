@@ -5,9 +5,14 @@ import Close from "../../assets/SVGs/close.svg";
 import Button from "../../components/Button/Button";
 import { NavLink } from "react-router-dom";
 import "./Navbar.css";
+import { useSelector } from "react-redux";
+import { signOut } from "firebase/auth";
+import { useNavigate } from "react-router-dom";
+import { auth } from "../../../firebase";
 
 const Navbar = () => {
-
+  const user = useSelector(state => state.user.user)
+  const navigate = useNavigate()
   return (
     <nav>
       <input type="checkbox" id="check" />
@@ -25,13 +30,25 @@ const Navbar = () => {
         <img src={Nav} alt="" className="ham" />
         <img src={Close} alt="" className="close" />
       </label>
-      <div className="register">
-        <NavLink to="/signup">
-          <Button text={"Register"} width={"150px"} height={"50px"} />
-        </NavLink>
-      </div>
-    </nav>
-  );
+      {
+        !user?.uid ?
+          (
+            <div className="register">
+              <NavLink to="/signup">
+                <Button text={"Register"} width={"150px"} height={"50px"} />
+              </NavLink>
+            </div>
+          ) : (
+            <div className="register">
+                <Button text={"Logout"} onClick={()=>{
+                  signOut(auth);
+                  navigate('/signin');
+                }} width={"150px"} height={"50px"} />
+              </div>
+              )
+      }
+            </nav>
+          );
 };
 
-export default Navbar;
+      export default Navbar;
