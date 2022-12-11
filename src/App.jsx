@@ -16,6 +16,8 @@ import { useDispatch } from "react-redux";
 import { fetchUser } from "./store/user/userSlice";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
+import Auction from "./pages/Auction/auction";
+import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const user = useSelector(state => state.user.user)
@@ -31,23 +33,28 @@ function App() {
     });
   }, [auth])
   return (
+    <>
     <Router>
+      <Navbar/>
       {user?.uid ? (<Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/signin" element={<Signin />}></Route>
         <Route path="/marketplace" element={<Marketplace />}></Route>
-        <Route path="/nft/:nftId" element={<div>Hello</div>}></Route>
+        <Route path="/auction" element={<Auction />}></Route>
+        {/* <Route path="/nft/:nftId" element={<div>Hello</div>}></Route> */}
         <Route path="*" element={<Home />}></Route>
       </Routes>)
       :
       (<Routes>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/signin" element={<Signin />}></Route>
+        <Route path="/auction" element={<Auction />}></Route>
         <Route path="*" element={<Signin />}></Route>
       </Routes>)}
     </Router>
+    </>
   );
 }
 

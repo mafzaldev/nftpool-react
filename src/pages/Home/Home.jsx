@@ -7,7 +7,7 @@ import "./Home.css";
 const Home = () => {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <section className="hero">
         <div className="main-content">
           <h1>Discover Rare Collections of Art & NFTs</h1>

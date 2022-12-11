@@ -11,7 +11,7 @@ const Profile = () => {
   console.log(user?.photoURL)
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <div className="profile-container">
         <div className="profile">
           <div className="personal-info">

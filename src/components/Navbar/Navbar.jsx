@@ -10,6 +10,8 @@ import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase";
 
+
+
 const Navbar = () => {
   const user = useSelector(state => state.user.user)
   const navigate = useNavigate()
@@ -22,8 +24,8 @@ const Navbar = () => {
         </NavLink>
       </div>
       <div className="nav-links">
-        <NavLink to="/marketplace">Marketplace</NavLink>
-        <NavLink to="#/">Artists</NavLink>
+        <NavLink to="/market">Marketplace</NavLink>
+        <NavLink to="/profile">Artists</NavLink>
         <NavLink to="#/">Commmunity</NavLink>
       </div>
       <label className="ham-burger" htmlFor="check">
@@ -40,7 +42,10 @@ const Navbar = () => {
             </div>
           ) : (
             <div className="register">
-                <Button text={"Logout"} onClick={()=>{
+             
+              <img className="img-profile" src={user?.photoURL }></img>
+ 
+                  <Button text={"Logout"} onClick={()=>{
                   signOut(auth);
                   navigate('/signin');
                 }} width={"150px"} height={"50px"} />

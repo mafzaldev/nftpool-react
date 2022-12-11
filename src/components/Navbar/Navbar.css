@@ -50,8 +50,13 @@ nav #check {
 .user-profile-icon:hover {
     opacity: 0.9;
 }
+.img-profile {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 50%;
+}
 
-@media (max-width: 480px) {
+@media (max-width: 500px) {
 
     nav {
         padding: 40px 18px !important;
@@ -120,4 +125,5 @@ nav #check {
     nav #check:checked~.ham-burger .ham {
         display: none !important;
     }
+    
 }
