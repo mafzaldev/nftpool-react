@@ -13,14 +13,17 @@ import "./App.css";
 import { auth } from "../firebase";
 import { useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
-import { fetchUser, refreshUser } from "./store/user/userSlice";
+import { fetchUser } from "./store/user/userSlice";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 
 function App() {
   const user = useSelector(state => state.user.user)
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   useEffect(() => {
+    window.process = {
+      ...window.process,
+    };
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(fetchUser({uid: user.uid, photoURL:user.photoURL }))

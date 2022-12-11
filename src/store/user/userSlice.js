@@ -20,14 +20,6 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (userInfo) => 
   return {...response.data[0], ...userInfo}
 })
 
-export const refreshUser = createAsyncThunk('user/refreshUser', async () => {
-  if (auth.currentUser?.uid == null){
-    return null
-  }
-  const response = await axios.get("http://localhost:3000/user", { params: {uid: auth.currentUser?.uid} })
-  return {...response.data[0], ...initialState.user}
-})
-
 export const addUser = createAsyncThunk('user/addUser', async (userInfo) => {
   const response = await axios.post("http://localhost:3000/user", userInfo)
   return {...response.data[0], ...userInfo}
@@ -59,19 +51,6 @@ const userSlice = createSlice({
       state.error = ''
     })
     builder.addCase(addUser.rejected, (state, action) => {
-      state.loading = false
-      state.user = auth.currentUser
-      state.error = action.error.message
-    })
-    builder.addCase(refreshUser.pending, state => {
-      state.loading = true
-    })
-    builder.addCase(refreshUser.fulfilled, (state, action) => {
-      state.loading = false
-      state.user = action.payload
-      state.error = ''
-    })
-    builder.addCase(refreshUser.rejected, (state, action) => {
       state.loading = false
       state.user = auth.currentUser
       state.error = action.error.message
