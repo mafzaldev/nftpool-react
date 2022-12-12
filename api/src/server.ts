@@ -2,6 +2,8 @@ import express from 'express';
 import mongoose from 'mongoose'
 import { json } from 'body-parser';
 import { userRouter } from './routes'
+import dotenv from "dotenv";
+dotenv.config()
 import cors from "cors"
 const app = express()
 app.use(cors({
@@ -11,8 +13,9 @@ app.use(cors({
 })); 
 app.use(json())
 app.use(userRouter)
-
-mongoose.connect('mongodb://0.0.0.0:27017/nft-pool')
+mongoose.set('strictQuery', false)
+console.log(process.env.URL)
+mongoose.connect("mongodb+srv://umairmanzoor:NFTpool@cluster0.ovmuugh.mongodb.net/?retryWrites=true&w=majority")
 .then(result => {
   console.log("Connected to DB.")
 })

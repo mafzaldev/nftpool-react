@@ -7,6 +7,7 @@ const initialState = {
   user: {
     uid: auth.currentUser?.uid,
     photoURL: auth.currentUser?.photoURL
+    
   },
   error: ''
 }

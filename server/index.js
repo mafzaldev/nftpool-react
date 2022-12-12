@@ -18,5 +18,5 @@ app.use('/',router);
 
 
 mogoose.connect(process.env.URL,{useNewUrlParser:true,useUnifiedTopology:true})
-.then(()=>app.listen(process.env.PORT,()=>console.log("server is running on port 5000")))
+.then(()=>app.listen(process.env.PORT,()=>console.log("server is running on port 4000")))
 .catch((err)=>console.log(err));

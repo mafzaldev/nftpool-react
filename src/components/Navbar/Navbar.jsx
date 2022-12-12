@@ -45,11 +45,7 @@ const Navbar = () => {
               <NavLink to="/profile">
               <img className="img-profile" src={user?.photoURL }>
               </img>
-              </NavLink>
-    
-             
-              
- 
+              </NavLink> 
                   <Button text={"Logout"} onClick={()=>{
                   signOut(auth);
                   navigate('/signin');
