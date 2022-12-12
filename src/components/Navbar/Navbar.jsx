@@ -9,11 +9,14 @@ import { useSelector } from "react-redux";
 import { signOut } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase";
+import { useDispatch } from "react-redux";
+import { signoutUser } from "../../store/user/userSlice";
 
 
 
 const Navbar = () => {
   const user = useSelector(state => state.user.user)
+  const dispatch = useDispatch()
   const navigate = useNavigate()
   return (
     <nav>
@@ -33,7 +36,7 @@ const Navbar = () => {
         <img src={Close} alt="" className="close" />
       </label>
       {
-        !user?.uid ?
+        (!user?.uid || !auth?.currentUser) ?
           (
             <div className="register">
               <NavLink to="/signup">
@@ -45,9 +48,9 @@ const Navbar = () => {
               <NavLink to="/profile">
               <img className="img-profile" src={user?.photoURL }>
               </img>
-              </NavLink> 
+              </NavLink>
                   <Button text={"Logout"} onClick={()=>{
-                  signOut(auth);
+                  dispatch(signoutUser())
                   navigate('/signin');
                 }} width={"150px"} height={"50px"} />
               </div>

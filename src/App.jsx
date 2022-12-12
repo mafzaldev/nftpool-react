@@ -21,6 +21,8 @@ import Navbar from "./components/Navbar/Navbar";
 
 function App() {
   const user = useSelector(state => state.user.user)
+  const state = useSelector(state => state)
+  console.log(state)
   const dispatch = useDispatch();
   useEffect(() => {
     window.process = {
