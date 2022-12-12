@@ -1,6 +1,7 @@
 import axios from 'axios'
 import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import { auth } from '../../../firebase'
+import { signOut } from 'firebase/auth'
 
 const initialState = {
   loading: false,
@@ -13,9 +14,11 @@ const initialState = {
 
 // Generates pending, fulfilled and rejected action types
 export const fetchUser = createAsyncThunk('user/fetchUser', async (userInfo) => {
+  console.log({response: response.data[0], userInfo})
   if (userInfo.uid == null){
     return null
   }
+  console.log({response: response.data[0], userInfo})
   const response = await axios.get("http://localhost:3000/user", { params: {uid: userInfo.uid} })
   return {...response.data[0], ...userInfo}
 
@@ -24,6 +27,11 @@ export const fetchUser = createAsyncThunk('user/fetchUser', async (userInfo) => 
 export const addUser = createAsyncThunk('user/addUser', async (userInfo) => {
   const response = await axios.post("http://localhost:3000/user", userInfo)
   return {...response.data[0], ...userInfo}
+})
+
+export const signoutUser = createAsyncThunk('user/signout', async () => {
+  signOut(auth);
+  return null
 })
 
 const userSlice = createSlice({
@@ -52,6 +60,19 @@ const userSlice = createSlice({
       state.error = ''
     })
     builder.addCase(addUser.rejected, (state, action) => {
+      state.loading = false
+      state.user = auth.currentUser
+      state.error = action.error.message
+    })
+    builder.addCase(signoutUser.pending, state => {
+      state.loading = true
+    })
+    builder.addCase(signoutUser.fulfilled, (state, action) => {
+      state.loading = false
+      state.user = action.payload
+      state.error = ''
+    })
+    builder.addCase(signoutUser.rejected, (state, action) => {
       state.loading = false
       state.user = auth.currentUser
       state.error = action.error.message

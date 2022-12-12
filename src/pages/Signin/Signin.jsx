@@ -18,7 +18,7 @@ const Signin = () => {
   const signIn = (provider) => {
     signInWithPopup(auth, provider).catch(alert)
       .then(result => {
-        dispatch(fetchUser({ photoURL: result.user.photoURL, uid: result.user.uid, email: result.user.email }))
+        dispatch(fetchUser({ photoURL: result.user.photoURL, uid: result.user.uid }))
         navigate('/')
       })
   }
