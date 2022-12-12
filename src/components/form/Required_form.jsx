@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase";
 import Button from "../../components/Button/Button";
 import { addUser } from "../../store/user/userSlice";
-import "./Signup.css";
+import "./required_form.css";
 
-const Signup = () => {
+const Required_form = () => {
   const dispatch = useDispatch()
   const navigate = useNavigate();
   const [credentials, setCredentials] = useState({
@@ -30,8 +30,8 @@ const Signup = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    if (credentials.password === credentials.confirmPassword) {
-      createUserWithEmailAndPassword(auth, credentials.email, credentials.password).then(result => {
+
+        result => {
         dispatch(addUser({ 
           firstName: credentials.fname,
           lastName: credentials.lname,
@@ -41,15 +41,12 @@ const Signup = () => {
           uid: result.user.uid
 
          }))
-        navigate('/form')
-      })
-    } else {
-      alert("Invalid: Password and Confirm password field should be same!");
+        //navigate('/form')
+      }
     }
-  };
   return (
     <div className="container signup-con">
-      <h3>Sign up to NFTPool</h3>
+      <h3>One Last step </h3>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
           <div className="row">
@@ -81,24 +78,13 @@ const Signup = () => {
             placeholder="Enter date of birth"
             required
           />
-          <input
-            type="text"
-            name="role"
-            id="role"
-            value={credentials.role}
-            onChange={handleChange}
-            placeholder="Enter your role"
-            required
-          />
-          <input
-            type="email"
-            name="email"
-            id="email"
-            value={credentials.email}
-            onChange={handleChange}
-            placeholder="Enter email address"
-            required
-          />
+            <div> 
+            <label for="role">Select Role: </label>
+            < select name="role" id="role" required>
+                <option className="row" value="artist">Artist</option>
+                <option className="row" value="collector">Collector</option>
+            </select>
+            </div>
           <input
             type="phone"
             name="phone"
@@ -110,43 +96,19 @@ const Signup = () => {
           />
           <div className="row">
             <input
-              type="password"
-              name="password"
-              id="password"
-              value={credentials.password}
-              onChange={handleChange}
-              placeholder="Enter password"
+              type="text"
+              name="Wallet Address"
+              id="waddress"
+              placeholder="Enter crypto wallet address"
               required
             />
-            <input
-              type="password"
-              name="confirmPassword"
-              id="confirmPassword"
-              value={credentials.confirmPassword}
-              onChange={handleChange}
-              placeholder="Confirm password"
-              required
-            />
+            
           </div>
-          <Button text={"Sign Up"} width={"350px"} height={"40px"} />
-        </form>
-        <div className="other-options">
-          <span>or continue with</span>
-          <div>
-            <a href="">Google</a>
-            <a href="">Facebook</a>
-          </div>
-        </div>
+          <Button text={"Finish UP"} width={"350px"} height={"40px"} />
+        </form>     
       </div>
-      <div className="footer">
-
-      Already have an account?
-        <span>
-          <Link to="/signin">Sign In</Link>
-        </span>
-      </div>
+      
     </div>
   );
 };
-
-export default Signup;
+export default Required_form;

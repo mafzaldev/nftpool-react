@@ -18,6 +18,7 @@ import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Auction from "./pages/Auction/auction";
 import Navbar from "./components/Navbar/Navbar";
+import Required_form from "./components/form/Required_form";
 
 function App() {
   const user = useSelector(state => state.user.user)
@@ -41,6 +42,7 @@ function App() {
       {user?.uid ? (<Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/form" element={<Required_form />}></Route>
         <Route path="/signup" element={<Signup />}></Route>
         <Route path="/signin" element={<Signin />}></Route>
         <Route path="/marketplace" element={<Marketplace />}></Route>
