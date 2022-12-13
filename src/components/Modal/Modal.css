@@ -1,0 +1,56 @@
+.backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: rgba(0, 0, 0, 0.75);
+    z-index: 10;
+}
+
+.modal {
+    position: fixed;
+    width: 500px;
+    height: 450px;
+    left: 33%;
+    top: 15%;
+    border-radius: 10px;
+    background-color: #16161d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 5px solid var(--primary-color);
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 5px 5px;
+    padding: 25px;
+    z-index: 15;
+}
+
+.modal-enter {
+    transform: translateY(10rem);
+    opacity: 0;
+}
+
+.modal-enter-active {
+    transform: translateY(0);
+    opacity: 1;
+    transition: all 200ms;
+}
+
+.modal-exit {
+    transform: translateY(0);
+    opacity: 1;
+}
+
+.modal-exit-active {
+    transform: translateY(-10rem);
+    opacity: 0;
+    transition: all 200ms;
+}
+
+.dropdown {
+    text-indent: 10px;
+    height: 40px;
+    width: 100%;
+    border: none;
+    cursor: pointer;
+}

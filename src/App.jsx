@@ -21,9 +21,9 @@ import Navbar from "./components/Navbar/Navbar";
 import Required_form from "./components/form/Required_form";
 
 function App() {
-  const user = useSelector(state => state.user.user)
-  const state = useSelector(state => state)
-  console.log(state)
+  const user = useSelector((state) => state.user.user);
+  const state = useSelector((state) => state);
+  console.log(state);
   const dispatch = useDispatch();
   useEffect(() => {
     window.process = {
@@ -31,33 +31,34 @@ function App() {
     };
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        dispatch(fetchUser({uid: user.uid, photoURL:user.photoURL }))
-      } 
+        dispatch(fetchUser({ uid: user.uid, photoURL: user.photoURL }));
+      }
     });
-  }, [auth])
+  }, [auth]);
   return (
     <>
-    <Router>
-      <Navbar/>
-      {user?.uid ? (<Routes>
-        <Route path="/" element={<Home />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
-        <Route path="/form" element={<Required_form />}></Route>
-        <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/signin" element={<Signin />}></Route>
-        <Route path="/marketplace" element={<Marketplace />}></Route>
-        <Route path="/auction" element={<Auction />}></Route>
-        {/* <Route path="/nft/:nftId" element={<div>Hello</div>}></Route> */}
-        <Route path="*" element={<Home />}></Route>
-      </Routes>)
-      :
-      (<Routes>
-        <Route path="/signup" element={<Signup />}></Route>
-        <Route path="/signin" element={<Signin />}></Route>
-        <Route path="/auction" element={<Auction />}></Route>
-        <Route path="*" element={<Signin />}></Route>
-      </Routes>)}
-    </Router>
+      <Router>
+        {user?.uid ? (
+          <Routes>
+            <Route path="/" element={<Home />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
+            <Route path="/form" element={<Required_form />}></Route>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/signin" element={<Signin />}></Route>
+            <Route path="/marketplace" element={<Marketplace />}></Route>
+            <Route path="/auction" element={<Auction />}></Route>
+            {/* <Route path="/nft/:nftId" element={<div>Hello</div>}></Route> */}
+            <Route path="*" element={<Home />}></Route>
+          </Routes>
+        ) : (
+          <Routes>
+            <Route path="/signup" element={<Signup />}></Route>
+            <Route path="/signin" element={<Signin />}></Route>
+            <Route path="/auction" element={<Auction />}></Route>
+            <Route path="*" element={<Signin />}></Route>
+          </Routes>
+        )}
+      </Router>
     </>
   );
 }
