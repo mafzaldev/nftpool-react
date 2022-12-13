@@ -24,6 +24,7 @@ body {
   justify-content: space-between;
   gap: 20px;
   font-weight: 600;
+  margin-top: 20vh;
 }
 
 h3 {

@@ -7,16 +7,18 @@ import Footer from "../../components/Footer/Footer";
 import "./Profile.css";
 import { useSelector } from "react-redux";
 const Profile = () => {
-  const user = useSelector(state => state.user.user)
-  console.log(user?.photoURL)
+  const user = useSelector((state) => state.user.user);
+  console.log(user?.photoURL);
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <div className="profile-container">
         <div className="profile">
           <div className="personal-info">
             <img src={user?.photoURL} alt="" />
-            <span className="name">{user?.firstName} {user.lastName}</span>
+            <span className="name">
+              {user?.firstName} {user.lastName}
+            </span>
             <span className="balance">34456.323442234 ETH</span>
           </div>
           <div className="account-info">

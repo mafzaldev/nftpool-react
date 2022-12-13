@@ -1,6 +1,11 @@
 import React, { useState } from "react";
-import { auth, googleProvider, emailProvider, facebookProvider } from '../../../firebase'
-import { signInWithEmailAndPassword, signInWithPopup } from 'firebase/auth'
+import {
+  auth,
+  googleProvider,
+  emailProvider,
+  facebookProvider,
+} from "../../../firebase";
+import { signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import Button from "../../components/Button/Button";
 import "./Signin.css";
 import { useNavigate } from "react-router-dom";
@@ -10,18 +15,21 @@ import { Link } from "react-router-dom";
 
 const Signin = () => {
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
   const signIn = (provider) => {
-    signInWithPopup(auth, provider).catch(alert)
-      .then(result => {
-        dispatch(fetchUser({ photoURL: result.user.photoURL, uid: result.user.uid }))
-        navigate('/')
-      })
-  }
+    signInWithPopup(auth, provider)
+      .catch(alert)
+      .then((result) => {
+        dispatch(
+          fetchUser({ photoURL: result.user.photoURL, uid: result.user.uid })
+        );
+        navigate("/");
+      });
+  };
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -30,16 +38,20 @@ const Signin = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    signInWithEmailAndPassword(auth, credentials.email, credentials.password)
-      .then(result => {
-        dispatch(fetchUser({ photoURL: result.user.photoURL, uid: result.user.uid }))
-        navigate('/')
-      })
-
+    signInWithEmailAndPassword(
+      auth,
+      credentials.email,
+      credentials.password
+    ).then((result) => {
+      dispatch(
+        fetchUser({ photoURL: result.user.photoURL, uid: result.user.uid })
+      );
+      navigate("/");
+    });
   };
 
   return (
-    <div className="container signin-con">
+    <div className="container">
       <h3>Sign in to NFTPool</h3>
       <div className="form-container">
         <form onSubmit={handleSubmit}>
@@ -70,9 +82,9 @@ const Signin = () => {
         </div>
       </div>
       <div className="footer">
-        Already have an account?
+        Don't have an account?
         <span>
-          <Link href="/signup">Sign Up</Link>
+          <Link to="/signup">Sign Up</Link>
         </span>
       </div>
     </div>
