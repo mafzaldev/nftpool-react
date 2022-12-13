@@ -6,6 +6,8 @@ import Button from "../../components/Button/Button";
 
 import Backdrop from "./Backdrop";
 import "./Modal.css";
+import { useDispatch } from "react-redux";
+import { addUser } from "../../store/user/userSlice";
 
 const ModalOverlay = ({ uid, handleModal }) => {
   const [credentials, setCredentials] = useState({
@@ -15,7 +17,7 @@ const ModalOverlay = ({ uid, handleModal }) => {
     role: "",
     phone: "",
   });
-
+  const dispatch = useDispatch()
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -24,8 +26,24 @@ const ModalOverlay = ({ uid, handleModal }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(credentials, "credentials");
-    //TODO: POST credentials to MONGODB
+    console.log({
+      firstName: credentials.fname,
+      lastName: credentials.lname,
+      dob: credentials.dob,
+      phone: credentials.phone,
+      role: credentials.role,
+      uid: uid,
+    });
+    dispatch(
+      addUser({
+        firstName: credentials.fname,
+        lastName: credentials.lname,
+        dob: credentials.dob,
+        phone: credentials.phone,
+        role: credentials.role,
+        uid,
+      })
+    );
     handleModal();
   };
 
