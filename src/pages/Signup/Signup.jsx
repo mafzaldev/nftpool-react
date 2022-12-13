@@ -32,15 +32,15 @@ const Signup = () => {
     e.preventDefault();
     if (credentials.password === credentials.confirmPassword) {
       createUserWithEmailAndPassword(auth, credentials.email, credentials.password).then(result => {
-        dispatch(addUser({ 
-          firstName: credentials.fname,
-          lastName: credentials.lname,
-          dob: credentials.dob,
-          phone: credentials.phone,
-          role: credentials.role,
-          uid: result.user.uid
+        // dispatch(addUser({ 
+        //   firstName: credentials.fname,
+        //   lastName: credentials.lname,
+        //   dob: credentials.dob,
+        //   phone: credentials.phone,
+        //   role: credentials.role,
+        //   uid: result.user.uid
 
-         }))
+        //  }))
         navigate('/form')
       })
     } else {
