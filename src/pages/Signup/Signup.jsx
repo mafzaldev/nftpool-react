@@ -41,16 +41,14 @@ const Signup = () => {
         credentials.password
       ).then((result) => {
         tempUid = result.user.uid;
-        dispatch(
-          addUser({
-            firstName: credentials.fname,
-            lastName: credentials.lname,
-            dob: credentials.dob,
-            phone: credentials.phone,
-            role: credentials.role,
-            uid: result.user.uid,
-          })
-        );
+        // console.log({
+        //   firstName: credentials.fname,
+        //   lastName: credentials.lname,
+        //   dob: credentials.dob,
+        //   phone: credentials.phone,
+        //   role: credentials.role,
+        //   uid: result.user.uid,
+        // })
         setUid(tempUid);
       });
       handleModal();

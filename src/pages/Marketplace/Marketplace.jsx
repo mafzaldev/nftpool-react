@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 
 import bgImage001 from "../../assets/BGs/BG004.png";
 import "./Marketplace.css";
+import { useSelector } from "react-redux";
 
 export default function Marketplace() {
   const DUMMY_NFTs = [
@@ -33,7 +34,11 @@ export default function Marketplace() {
       uploadDate: "20-02-2020",
     },
   ];
-
+  const provider = useSelector(state => state.web3Api.provider)
+  const test = async () => {
+    console.log(await provider?.listAccounts())
+  }
+  test()
   return (
     <>
       <Navbar />
