@@ -9,6 +9,7 @@ import Profile from "./pages/Profile/Profile";
 import Signup from "./pages/Signup/Signup";
 import Signin from "./pages/Signin/Signin";
 import Marketplace from "./pages/Marketplace/Marketplace";
+import NFTDetails from "./pages/NFTDetails/NFTDetails";
 import "./App.css";
 import { auth } from "../firebase";
 import { useSelector } from "react-redux";
@@ -17,7 +18,6 @@ import { fetchUser } from "./store/user/userSlice";
 import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Auction from "./pages/Auction/auction";
-import Navbar from "./components/Navbar/Navbar";
 import Required_form from "./components/form/Required_form";
 
 function App() {
@@ -46,8 +46,8 @@ function App() {
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/signin" element={<Signin />}></Route>
             <Route path="/marketplace" element={<Marketplace />}></Route>
+            <Route path="/nft/:nftId" element={<NFTDetails />}></Route>
             <Route path="/auction" element={<Auction />}></Route>
-            {/* <Route path="/nft/:nftId" element={<div>Hello</div>}></Route> */}
             <Route path="*" element={<Home />}></Route>
           </Routes>
         ) : (
@@ -55,6 +55,7 @@ function App() {
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/signin" element={<Signin />}></Route>
             <Route path="/auction" element={<Auction />}></Route>
+            <Route path="/nft/:nftId" element={<NFTDetails />}></Route>
             <Route path="*" element={<Signin />}></Route>
           </Routes>
         )}

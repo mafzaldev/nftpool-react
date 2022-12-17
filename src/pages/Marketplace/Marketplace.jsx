@@ -34,11 +34,11 @@ export default function Marketplace() {
       uploadDate: "20-02-2020",
     },
   ];
-  const provider = useSelector(state => state.web3Api.provider)
+  const provider = useSelector((state) => state.web3Api.provider);
   const test = async () => {
-    console.log(await provider?.listAccounts())
-  }
-  test()
+    console.log(await provider?.listAccounts());
+  };
+  test();
   return (
     <>
       <Navbar />

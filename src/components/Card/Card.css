@@ -13,7 +13,7 @@
   justify-content: center;
   position: absolute;
 
-  font-family: "Clash Display";
+  font-family: "Unbounded";
   font-size: 16px;
   font-weight: 600;
   margin-left: 5px;
@@ -29,7 +29,7 @@
 
 .card .upload .upload-time {
   margin-left: 5px;
-  font-family: "Clash Display";
+  font-family: "Unbounded";
   font-weight: 600;
   font-size: 16px;
 }
@@ -52,7 +52,7 @@
 }
 
 .card .blurred .nft-details .introd .nft-name {
-  font-family: "Clash Display";
+  font-family: "Unbounded";
   font-weight: 600;
   font-size: 20px;
   text-align: left;
@@ -69,7 +69,7 @@
 }
 
 .card .blurred .nft-details .price .crypto {
-  font-family: "Clash Display";
+  font-family: "Unbounded";
   font-weight: 600;
   font-size: 28px;
   color: var(--bold-color);

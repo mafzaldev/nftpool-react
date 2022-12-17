@@ -1,13 +1,12 @@
 import React, { useState } from "react";
 import ReactDOM from "react-dom";
 import { CSSTransition } from "react-transition-group";
-import axios from "axios";
-import Button from "../../components/Button/Button";
-
-import Backdrop from "./Backdrop";
-import "./Modal.css";
 import { useDispatch } from "react-redux";
 import { addUser } from "../../store/user/userSlice";
+import Button from "../../components/Button/Button";
+import Backdrop from "./Backdrop";
+
+import "./Modal.css";
 
 const ModalOverlay = ({ uid, handleModal }) => {
   const [credentials, setCredentials] = useState({
@@ -17,7 +16,7 @@ const ModalOverlay = ({ uid, handleModal }) => {
     role: "",
     phone: "",
   });
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;

@@ -26,7 +26,7 @@
 }
 
 .hero .main-content h1 {
-    font-family: "Clash Display";
+    font-family: "Unbounded";
     font-style: normal;
     font-weight: 600;
     font-size: 81px;
@@ -70,7 +70,7 @@
 }
 
 .hero .main-content .counter .counter-item .value {
-    font-family: "Clash Display";
+    font-family: "Unbounded";
     font-size: 20px;
     font-weight: 600;
     text-align: left;

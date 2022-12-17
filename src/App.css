@@ -327,7 +327,7 @@ footer p {
 
 @media (max-width: 480px) {
   footer {
-    margin: 150px 18px 0px !important;
+    margin: 50px 18px 0px !important;
     padding: 40px 18px !important;
     flex-direction: column !important;
     gap: 30px !important;
