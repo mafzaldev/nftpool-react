@@ -102,7 +102,7 @@ const ModalOverlay = ({ uid, handleModal }) => {
           placeholder="Enter mobile number"
           required
         />
-        <Button text={"Finalize details"} width={"350px"} height={"40px"} />
+        <Button text={"Confirm details"} width={"350px"} height={"40px"} />
       </form>
     </div>
   );
@@ -110,7 +110,6 @@ const ModalOverlay = ({ uid, handleModal }) => {
 };
 
 const Modal = (props) => {
-  console.log(props.uid);
   return (
     <>
       {props.show && <Backdrop />}

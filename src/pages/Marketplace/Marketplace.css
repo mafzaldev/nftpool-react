@@ -20,8 +20,8 @@
 
 .explore .header .heading h1 {
     font-family: "Unbounded";
-    font-size: 45px;
-    margin: 0 10px;
+    font-size: 30px;
+    margin: 20px 10px;
 }
 
 .explore .header .filters {
@@ -37,13 +37,36 @@
     grid-gap: 19px;
 }
 
+@media (max-width: 834px) {
+    .explore {
+        padding: 0px 20px !important;
+    }
+
+    .explore .nfts-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(370px, 1fr));
+    }
+}
+
+@media (max-width: 768px) {
+    .explore {
+        padding: 0px 20px !important;
+    }
+
+    .explore .nfts-grid {
+        display: flex !important;
+        flex-direction: column;
+        align-items: center;
+    }
+}
+
 @media (max-width: 480px) {
     .explore {
-        padding: 0px 18px !important;
+        padding: 0px 20px !important;
     }
 
     .explore .header .heading h1 {
-        font-size: 22px !important;
+        font-size: 18px;
         font-weight: 500;
         margin: 0 10px;
     }

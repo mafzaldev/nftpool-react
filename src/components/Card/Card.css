@@ -14,8 +14,8 @@
   position: absolute;
 
   font-family: "Unbounded";
-  font-size: 16px;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   margin-left: 5px;
   color: var(--bold-color);
 
@@ -27,12 +27,6 @@
   backdrop-filter: blur(25.2px);
 }
 
-.card .upload .upload-time {
-  margin-left: 5px;
-  font-family: "Unbounded";
-  font-weight: 600;
-  font-size: 16px;
-}
 
 .card .blurred {
   display: flex;
@@ -53,8 +47,8 @@
 
 .card .blurred .nft-details .introd .nft-name {
   font-family: "Unbounded";
-  font-weight: 600;
-  font-size: 20px;
+  font-weight: 500;
+  font-size: 18px;
   text-align: left;
 }
 
@@ -70,8 +64,8 @@
 
 .card .blurred .nft-details .price .crypto {
   font-family: "Unbounded";
-  font-weight: 600;
-  font-size: 28px;
+  font-weight: 500;
+  font-size: 18px;
   color: var(--bold-color);
   text-align: right;
 }
@@ -100,8 +94,12 @@
 }
 
 .card:hover {
-  transform: scale(1.04);
-  box-shadow: rgba(240, 46, 170, 0.4) 5px 10px, rgba(240, 46, 170, 0.3) 10px 20px;
+  transform: scale(1.01);
+  box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
 }
 
-@media (max-width: 480px) {}
+@media (max-width: 480px) {
+  .card .upload {
+    left: 50%;
+  }
+}

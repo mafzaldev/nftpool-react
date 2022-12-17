@@ -63,6 +63,7 @@ export default function Marketplace() {
         <div className="nfts-grid">
           {DUMMY_NFTs.map((nft) => (
             <Card
+              nftId={1}
               nftImage={nft.nftImage}
               nftName={nft.nftName}
               owner={nft.owner}

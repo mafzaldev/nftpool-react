@@ -50,6 +50,7 @@ nav #check {
 .user-profile-icon:hover {
     opacity: 0.9;
 }
+
 .img-profile {
     width: 3rem;
     height: 3rem;
@@ -57,7 +58,17 @@ nav #check {
     cursor: pointer;
 }
 
-@media (max-width: 500px) {
+@media (max-width: 834px) {
+    nav {
+        padding: 40px 25px !important;
+    }
+
+    .nav-links a {
+        padding-left: 20px;
+    }
+}
+
+@media (max-width: 480px) {
 
     nav {
         padding: 40px 18px !important;
@@ -126,5 +137,4 @@ nav #check {
     nav #check:checked~.ham-burger .ham {
         display: none !important;
     }
-    
 }

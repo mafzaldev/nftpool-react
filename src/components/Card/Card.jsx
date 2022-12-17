@@ -1,10 +1,10 @@
 import React from "react";
-// import Button from "./Button";
-import Heart from "../../assets/SVGs/Heart.svg";
-import Favourite from "../../assets/SVGs/Favourite.svg";
-import "./Card.css";
 import Button from "../Button/Button";
+import { useNavigate } from "react-router-dom";
+import "./Card.css";
+
 export default function Card({
+  nftId,
   nftImage,
   uploadDate,
   nftName,
@@ -12,6 +12,7 @@ export default function Card({
   cryptoValue,
   dollarValue,
 }) {
+  let navigate = useNavigate();
   const bg = {
     backgroundImage: `url(${nftImage})`,
     backgroundRepeat: "no-repeat",
@@ -19,7 +20,7 @@ export default function Card({
   };
 
   return (
-    <div className="card" style={bg}>
+    <div className="card" style={bg} onClick={() => navigate(`/nft/${nftId}`)}>
       <div className="upload">{uploadDate}</div>
 
       <div className="blurred">
@@ -36,13 +37,10 @@ export default function Card({
           </div>
           <div className="card-buttons">
             <div className="bid">
-              <Button text={"Place A bid"} width="100px" />
+              <Button text={"Place A bid"} width="120px" />
             </div>
             <div className="artwork">
-              <Button
-                text={"View Artwork"}
-                width="120px" 
-              />
+              <Button text={"View Artwork"} width="120px" />
             </div>
           </div>
         </div>
