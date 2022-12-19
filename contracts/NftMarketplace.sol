@@ -15,6 +15,14 @@ contract NftMarketplace is ERC721URIStorage, Ownable {
         address creator;
         bool isListed;
     }
+    // create struck for transaction
+    struct Transaction {
+        address from;
+        address to;
+        uint tokenId;
+        uint price;
+        uint timestamp;
+    }
 
     uint public listingPrice = 0.025 ether;
 
@@ -28,6 +36,8 @@ contract NftMarketplace is ERC721URIStorage, Ownable {
     mapping(uint => uint) private _idToOwnedIndex;
 
     uint256[] private _allNfts;
+    // create a variable to store all transactions in an array
+    Transaction[] private _allTransactions;
     mapping(uint => uint) private _idToNftIndex;
 
     event NftItemCreated(
@@ -227,4 +237,25 @@ contract NftMarketplace is ERC721URIStorage, Ownable {
         delete _idToNftIndex[tokenId];
         _allNfts.pop();
     }
+    // function to keep track of transactions and their status in an array
+    function _addTransaction(
+        address from,
+        address to,
+        uint tokenId,
+        uint price
+    ) private {
+        Transaction memory transaction = Transaction(
+            from,
+            to,
+            tokenId,
+            price,
+            block.timestamp
+        );
+        _allTransactions.push(transaction);
+    }
+    // function to return all transactions in an array
+    function getTransactions() public view returns (Transaction[] memory) {
+        return _allTransactions;
+    }
+    
 }
