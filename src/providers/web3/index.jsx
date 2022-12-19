@@ -28,8 +28,7 @@ const Web3Provider = ({children}) => {
     async function initWeb3() {
       try {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
-        const contract =  await loadContract("NftMarket", provider);
-        console.log("GG")
+        const contract =  await loadContract("NftMarketplace", provider);
         const signer = provider.getSigner();
         const signedContract = contract.connect(signer);
 

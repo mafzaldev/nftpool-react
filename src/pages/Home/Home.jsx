@@ -4,7 +4,9 @@ import Footer from "../../components/Footer/Footer";
 import Button from "../../components/Button/Button";
 import Main from "../../assets/SVGs/main.svg";
 import "./Home.css";
+import { useNavigate } from "react-router-dom";
 const Home = () => {
+  const navigate = useNavigate()
   return (
     <>
       <Navbar />
@@ -21,6 +23,14 @@ const Home = () => {
               text={"Start Collecting -->"}
               width={"300px"}
               height={"70px"}
+            />
+            <Button
+              text={"Create NFTs -->"}
+              width={"300px"}
+              height={"70px"}
+              onClick={()=>{
+                navigate("/createNft");
+              }}
             />
           </div>
           <div className="counter">

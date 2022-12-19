@@ -19,6 +19,7 @@ import { useEffect } from "react";
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Auction from "./pages/Auction/auction";
 import Required_form from "./components/form/Required_form";
+import CreateNFT from "./pages/CreateNFT/CreateNFT";
 
 function App() {
   const user = useSelector((state) => state.user.user);
@@ -46,6 +47,7 @@ function App() {
             <Route path="/signup" element={<Signup />}></Route>
             <Route path="/signin" element={<Signin />}></Route>
             <Route path="/marketplace" element={<Marketplace />}></Route>
+            <Route path="/createNft" element={<CreateNFT />}></Route>
             <Route path="/nft/:nftId" element={<NFTDetails />}></Route>
             <Route path="/auction" element={<Auction />}></Route>
             <Route path="*" element={<Home />}></Route>

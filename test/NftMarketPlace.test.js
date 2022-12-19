@@ -1,14 +1,14 @@
 
-const NftMarket = artifacts.require("NftMarketplace");
+const NftMarketplace = artifacts.require("NftMarketplace");
 const { ethers } = require("ethers");
 
-contract("NftMarket", accounts => {
+contract("NftMarketplace", accounts => {
   let _contract = null;
   let _nftPrice = ethers.utils.parseEther("0.3").toString();
   let _listingPrice = ethers.utils.parseEther("0.025").toString();
 
   before(async () => {
-    _contract = await NftMarket.deployed();
+    _contract = await NftMarketplace.deployed();
   })
 
   describe("Mint token", () => {

@@ -11,6 +11,8 @@ import { useNavigate } from "react-router-dom";
 import { auth } from "../../../firebase";
 import { useDispatch } from "react-redux";
 import { signoutUser } from "../../store/user/userSlice";
+import Walletbar from "../WalletBar/WalletBar";
+import { useAccount, useNetwork } from "../../hooks/web3";
 
 
 
@@ -18,6 +20,9 @@ const Navbar = () => {
   const user = useSelector(state => state.user.user)
   const dispatch = useDispatch()
   const navigate = useNavigate()
+  const { account } = useAccount();
+  const { network } = useNetwork();
+
   return (
     <nav>
       <input type="checkbox" id="check" />
@@ -46,18 +51,24 @@ const Navbar = () => {
           ) : (
             <div className="register">
               <NavLink to="/profile">
-              <img className="img-profile" src={user?.photoURL }>
-              </img>
+                <img className="img-profile" src={user?.photoURL}>
+                </img>
               </NavLink>
-                  <Button text={"Logout"} onClick={()=>{
-                  dispatch(signoutUser())
-                  navigate('/signin');
-                }} width={"150px"} height={"50px"} />
-              </div>
-              )
+              <Button text={"Logout"} onClick={() => {
+                dispatch(signoutUser())
+                navigate('/signin');
+              }} width={"150px"} height={"50px"} />
+            </div>
+          )
       }
-            </nav>
-          );
+      <Walletbar
+        isInstalled={account.isInstalled}
+        isLoading={account.isLoading}
+        connect={account.connect}
+        account={account.data}
+      /> 
+    </nav>
+  );
 };
 
-      export default Navbar;
+export default Navbar;
