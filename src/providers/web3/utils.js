@@ -1,6 +1,7 @@
 
-import { setupHooks } from "@hooks/web3/setupHooks";
-import { Contract, ethers, providers } from "ethers";
+import { setupHooks } from "../../hooks/web3/setupHooks";
+import { ethers } from "ethers";
+
 
 
 export const createDefaultState = () => {
@@ -25,7 +26,7 @@ export const createWeb3State = ({
   }
 }
 
-const NETWORK_ID = process.env.NEXT_PUBLIC_NETWORK_ID;
+const NETWORK_ID = import.meta.env.VITE_PUBLIC_NETWORK_ID;
 
 export const loadContract = async (
   name,  // NftMarket
