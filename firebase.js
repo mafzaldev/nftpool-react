@@ -14,23 +14,9 @@ const firebaseConfig = {
 const app = !getApps().length
   ? initializeApp(firebaseConfig)
   : getApp();
-const db = getFirestore(app);
 const auth = getAuth(app);
 const googleProvider = new GoogleAuthProvider();
 const emailProvider = new EmailAuthProvider();
 const facebookProvider = new FacebookAuthProvider();
 
-// enableIndexedDbPersistence(db)
-//   .catch((err) => {
-//       if (err.code == 'failed-precondition') {
-//           // Multiple tabs open, persistence can only be enabled
-//           // in one tab at a a time.
-//           // ...
-//       } else if (err.code == 'unimplemented') {
-//           // The current browser does not support all of the
-//           // features required to enable persistence
-//           // ...
-//       }
-//   });
-
-export { db, auth, googleProvider, emailProvider, facebookProvider };
+export { auth, googleProvider, emailProvider, facebookProvider };
