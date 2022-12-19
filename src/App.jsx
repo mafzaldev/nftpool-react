@@ -58,6 +58,7 @@ function App() {
             <Route path="/signin" element={<Signin />}></Route>
             <Route path="/auction" element={<Auction />}></Route>
             <Route path="/nft/:nftId" element={<NFTDetails />}></Route>{" "}
+            <Route path="/createNft" element={<CreateNFT />}></Route>
             <Route path="/marketplace" element={<Marketplace />}></Route>
             <Route path="*" element={<Signin />}></Route>
           </Routes>
