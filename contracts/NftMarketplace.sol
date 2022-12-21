@@ -117,10 +117,6 @@ contract NftMarketplace is ERC721URIStorage, Ownable {
         uint price
     ) public payable returns (uint) {
         require(!tokenURIExists(tokenURI), "Token URI already exists");
-        require(
-            msg.value == listingPrice,
-            "Price must be equal to listing price"
-        );
 
         _tokenIds.increment();
         _listedItems.increment();
@@ -159,7 +155,7 @@ contract NftMarketplace is ERC721URIStorage, Ownable {
             "Item is already on sale"
         );
         require(
-            msg.value == listingPrice,
+            msg.value >= listingPrice,
             "Price must be equal to listing price"
         );
 

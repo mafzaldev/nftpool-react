@@ -7,10 +7,11 @@ import { ethers } from "ethers";
 import { toast } from "react-toastify";
 import { useNetwork } from '../../hooks/web3';
 import { NavLink } from 'react-router-dom';
-import { getVerify, postVerify } from '../../api/verify';
-import { verifyImage } from '../../api/verify-image';
+import { v4 as uuidv4 } from "uuid";
+import { NFTStorage } from 'nft.storage'
+import { nftStorageSecretApiKey, contractAddress } from "../../api/utils";
 
-const ALLOWED_FIELDS = ["name", "description", "image", "attributes"];
+const ALLOWED_FIELDS = ["name", "description", "imageLink", "image"];
 
 const CreateNFT = () => {
   const { ethereum, contract } = useWeb3();
@@ -21,25 +22,22 @@ const CreateNFT = () => {
   const [nftMeta, setNftMeta] = useState({
     name: "",
     description: "",
-    image: "",
-    attributes: [
-      { trait_type: "attack", value: "0" },
-      { trait_type: "health", value: "0" },
-      { trait_type: "speed", value: "0" },
-    ],
+    imageLink: "",
+    image: null
   });
-  console.log(import.meta.env)
+  const client = new NFTStorage({ token: nftStorageSecretApiKey });
+
   const getSignedData = async () => {
-    const messageToSign = await getVerify();
+    const messageToSign = { contractAddress, id: uuidv4() };
     const accounts = await ethereum?.request({method: "eth_requestAccounts"});
     const account = accounts[0];
 
     const signedData = await ethereum?.request({
       method: "personal_sign",
       params: [
-        JSON.stringify(messageToSign.data),
+        JSON.stringify(messageToSign),
         account,
-        messageToSign.data.id,
+        messageToSign.id,
       ],
     });
 
@@ -51,34 +49,15 @@ const CreateNFT = () => {
       console.error("Select a file");
       return;
     }
-
+    await getSignedData();
     const file = e.target.files[0];
-    const buffer = await file.arrayBuffer();
-    const bytes = new Uint8Array(buffer);
-
-    try {
-      const promise = verifyImage(bytes, file.name.replace(/\.[^/.]+$/, ""), file.type)
-      const res = await toast.promise(
-        promise, {
-          pending: "Uploading image",
-          success: "Image uploaded",
-          error: "Image upload error"
-        }
-      )
-
-      const data = res.data;
-
+    const ipfsHash = await client.storeBlob(file);
       setNftMeta({
         ...nftMeta,
-        image: `${import.meta.env.VITE_PUBLIC_PINATA_DOMAIN}/ipfs/${
-          data.IpfsHash
-        }`,
+        imageLink: `https://${ipfsHash}.ipfs.nftstorage.link`,
+        image: file
       });
-    } catch (e) {
-      console.error(e.message);
-    }
   };
-
   const handleChange = (e) => {
     const { name, value } = e.target;
     setNftMeta({ ...nftMeta, [name]: value });
@@ -86,19 +65,19 @@ const CreateNFT = () => {
 
   const uploadMetadata = async () => {
     try {
-      const {signedData, account} = await getSignedData();
-      const promise = postVerify(nftMeta);
+    
+      const metadata = client.store(nftMeta)
 
-      const res = await toast.promise(promise, {
+
+      const data = await toast.promise(metadata, {
         pending: "Uploading metadata",
         success: "Metadata uploaded",
         error: "Metadata upload error",
       });
+      console.log(data)
 
-      const data = res.data;
-      setNftURI(
-        `${process.env.NEXT_PUBLIC_PINATA_DOMAIN}/ipfs/${data.IpfsHash}`
-      );
+      setNftURI(`https://nftstorage.link/ipfs/${data.ipnft}/metadata.json`);
+      console.log(nftURI)
     } catch (e) {
       console.error(e.message);
     }
@@ -117,10 +96,7 @@ const CreateNFT = () => {
 
       const tx = await contract?.mintToken(
         nftURI,
-        ethers.utils.parseEther(price),
-        {
-          value: ethers.utils.parseEther((0.025).toString()),
-        }
+        ethers.utils.parseEther(price)
       );
 
       await toast.promise(tx?.wait(), {
@@ -210,7 +186,7 @@ const CreateNFT = () => {
                           type="text"
                           name="uri"
                           id="uri"
-                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                          className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 color: black"
                           placeholder="http://link.com/data.json"
                         />
                       </div>
@@ -242,7 +218,7 @@ const CreateNFT = () => {
                         type="number"
                         name="price"
                         id="price"
-                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300"
+                        className="focus:ring-indigo-500 focus:border-indigo-500 flex-1 block w-full rounded-none rounded-r-md sm:text-sm border-gray-300 font-medium text-gray-700"
                         placeholder="0.8"
                       />
                     </div>
@@ -320,8 +296,8 @@ const CreateNFT = () => {
                     </p>
                   </div>
                   {/* Has Image? */}
-                  {nftMeta.image ? (
-                    <img src={nftMeta.image} alt="" className="h-40" />
+                  {nftMeta.imageLink ? (
+                    <img src={nftMeta.imageLink} alt="" className="h-40" />
                   ) : (
                     <div>
                       <label className="block text-sm font-medium text-gray-700">
