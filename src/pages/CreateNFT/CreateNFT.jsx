@@ -7,6 +7,8 @@ import { ethers } from 'ethers';
 import { toast } from "react-toastify";
 import { useNetwork } from '../../hooks/web3';
 import { NavLink } from 'react-router-dom';
+import { getVerify, postVerify } from '../../api/verify';
+import { verifyImage } from '../../api/verify-image';
 
 const ALLOWED_FIELDS = ["name", "description", "image", "attributes"];
 
@@ -26,9 +28,9 @@ const CreateNFT = () => {
       {trait_type: "speed", value: "0"},
     ]
   });
-
+  console.log(import.meta.env)
   const getSignedData = async () => {
-    const messageToSign = await axios.get("/api/verify");
+    const messageToSign = await getVerify();
     const accounts = await ethereum?.request({method: "eth_requestAccounts"});
     const account = accounts[0];
 
@@ -51,15 +53,7 @@ const CreateNFT = () => {
     const bytes = new Uint8Array(buffer);
     
     try {
-      const {signedData, account} = await getSignedData();
-      const promise = axios.post("/api/verify-image", {
-        address: account,
-        signature: signedData,
-        bytes,
-        contentType: file.type,
-        fileName: file.name.replace(/\.[^/.]+$/, "")
-      });
-
+      const promise = verifyImage(bytes, file.name.replace(/\.[^/.]+$/, ""), file.type)
       const res = await toast.promise(
         promise, {
           pending: "Uploading image",
@@ -84,26 +78,10 @@ const CreateNFT = () => {
     setNftMeta({...nftMeta, [name]: value});
   }
 
-  const handleAttributeChange = (e) => {
-    const { name, value } = e.target;
-    const attributeIdx = nftMeta.attributes.findIndex(attr => attr.trait_type === name);
-
-    nftMeta.attributes[attributeIdx].value = value;
-    setNftMeta({
-      ...nftMeta,
-      attributes: nftMeta.attributes
-    })
-  }
-
   const uploadMetadata = async () => {
     try {
       const {signedData, account} = await getSignedData();
-
-      const promise = axios.post("/api/verify", {
-        address: account,
-        signature: signedData,
-        nft: nftMeta
-      })
+      const promise = postVerify(nftMeta);
 
       const res = await toast.promise(
         promise, {
@@ -360,26 +338,6 @@ const CreateNFT = () => {
                     </div>
                   </div>
                   }
-                  <div className="grid grid-cols-6 gap-6">
-                    { nftMeta.attributes.map(attribute =>
-                      <div key={attribute.trait_type} className="col-span-6 sm:col-span-6 lg:col-span-2">
-                        <label htmlFor={attribute.trait_type} className="block text-sm font-medium text-gray-700">
-                          {attribute.trait_type}
-                        </label>
-                        <input
-                          onChange={handleAttributeChange}
-                          value={attribute.value}
-                          type="text"
-                          name={attribute.trait_type}
-                          id={attribute.trait_type}
-                          className="mt-1 focus:ring-indigo-500 focus:border-indigo-500 block w-full shadow-sm sm:text-sm border-gray-300 rounded-md"
-                        />
-                      </div>
-                    )}
-                  </div>
-                  <p className="text-sm !mt-2 text-gray-500">
-                    Choose value from 0 to 100
-                  </p>
                 </div>
                 <div className="px-4 py-3 bg-gray-50 text-right sm:px-6">
                   <button
