@@ -28,12 +28,12 @@ const CreateNFT = () => {
     createdAt: ""
   });
   const client = new NFTStorage({ token: nftStorageSecretApiKey });
-
+  const navigate = useNavigate();
   const getSignedData = async () => {
     const messageToSign = { contractAddress, id: uuidv4() };
     const accounts = await ethereum?.request({method: "eth_requestAccounts"});
     const account = accounts[0];
-    const navigate = useNavigate();
+    
     const signedData = await ethereum?.request({
       method: "personal_sign",
       params: [
@@ -58,7 +58,7 @@ const CreateNFT = () => {
         ...nftMeta,
         imageLink: `https://${ipfsHash}.ipfs.nftstorage.link`,
         image: file,
-        createdAt: Date.now().toLocaleString()
+        createdAt: new Date().toISOString().slice(0, 10)
       });
   };
   const handleChange = (e) => {

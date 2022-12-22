@@ -51,6 +51,7 @@ export default function Marketplace() {
               cryptoValue={nft.price}
               dollarValue={nft.price * 1214.16}
               uploadDate={nft.meta.createdAt}
+              description={nft.meta.description}
               buyFunction={()=>{
                 buyNft(nft.tokenId, nft.price);
               }}
