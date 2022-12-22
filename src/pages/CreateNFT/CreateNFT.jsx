@@ -1,18 +1,26 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from "react";
+import Navbar from "../../components/Navbar/Navbar";
 import { Switch } from "@headlessui/react";
 import axios from "axios";
 import { useWeb3 } from "../../providers/web3";
 import { ethers } from "ethers";
-import { toast } from "react-toastify";
-import { useNetwork } from '../../hooks/web3';
-import { NavLink } from 'react-router-dom';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { useNetwork } from "../../hooks/web3";
+import { NavLink } from "react-router-dom";
 import { v4 as uuidv4 } from "uuid";
-import { NFTStorage } from 'nft.storage'
+import { NFTStorage } from "nft.storage";
 import { nftStorageSecretApiKey, contractAddress } from "../../api/utils";
 import { useNavigate } from "react-router-dom";
 
-const ALLOWED_FIELDS = ["name", "description", "imageLink", "image", "createdAt"];
+const ALLOWED_FIELDS = [
+  "name",
+  "description",
+  "imageLink",
+  "image",
+  "createdAt",
+];
 
 const CreateNFT = () => {
   const { ethereum, contract } = useWeb3();
@@ -25,22 +33,18 @@ const CreateNFT = () => {
     description: "",
     imageLink: "",
     image: null,
-    createdAt: ""
+    createdAt: "",
   });
   const client = new NFTStorage({ token: nftStorageSecretApiKey });
   const navigate = useNavigate();
   const getSignedData = async () => {
     const messageToSign = { contractAddress, id: uuidv4() };
-    const accounts = await ethereum?.request({method: "eth_requestAccounts"});
+    const accounts = await ethereum?.request({ method: "eth_requestAccounts" });
     const account = accounts[0];
     
     const signedData = await ethereum?.request({
       method: "personal_sign",
-      params: [
-        JSON.stringify(messageToSign),
-        account,
-        messageToSign.id,
-      ],
+      params: [JSON.stringify(messageToSign), account, messageToSign.id],
     });
 
     return { signedData, account };
@@ -68,9 +72,7 @@ const CreateNFT = () => {
 
   const uploadMetadata = async () => {
     try {
-    
-      const metadata = client.store(nftMeta)
-
+      const metadata = client.store(nftMeta);
 
       const data = await toast.promise(metadata, {
         pending: "Uploading metadata",
@@ -135,7 +137,8 @@ const CreateNFT = () => {
 
   return (
     <div>
-      <div className="py-4">
+      <Navbar />
+      <div className="p2-4">
         {!nftURI && (
           <div className="flex">
             <div className="mr-2 font-bold underline">
