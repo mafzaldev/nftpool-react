@@ -6,39 +6,20 @@ import Navbar from "../../components/Navbar/Navbar";
 import bgImage001 from "../../assets/BGs/BG004.png";
 import "./Marketplace.css";
 import { useSelector } from "react-redux";
+import { useListedNfts } from "../../hooks/web3";
+import { useEffect } from "react";
+import { useState } from "react";
 
 export default function Marketplace() {
-  const DUMMY_NFTs = [
-    {
-      nftImage: bgImage001,
-      nftName: "Holographic #21",
-      owner: "Staudinger",
-      cryptoValue: "2.74 ETH",
-      dollarValue: "$3,618.36",
-      uploadDate: "20-02-2020",
-    },
-    {
-      nftImage: bgImage001,
-      nftName: "Holographic #21",
-      owner: "Staudinger",
-      cryptoValue: "2.74 ETH",
-      dollarValue: "$3,618.36",
-      uploadDate: "20-02-2020",
-    },
-    {
-      nftImage: bgImage001,
-      nftName: "Holographic #21",
-      owner: "Staudinger",
-      cryptoValue: "2.74 ETH",
-      dollarValue: "$3,618.36",
-      uploadDate: "20-02-2020",
-    },
-  ];
-  const provider = useSelector((state) => state.web3Api.provider);
-  const test = async () => {
-    console.log(await provider?.listAccounts());
-  };
-  test();
+  const { nfts } = useListedNfts();
+  const { contract, getNfts, buyNft } = nfts;
+  const [ nftList, setNftList ] = useState([])
+  useEffect(()=>{
+    getNfts().then(res => {
+      setNftList(res);
+    })
+  }, [])
+  
   return (
     <>
       <Navbar />
@@ -54,21 +35,21 @@ export default function Marketplace() {
             </span>
           </div>
           {/* <div className="filters">
-          <Filter styleClass={"filter"} text={"Categories"} />
-          <Filter styleClass={"filter"} text={"Status"} />
-          <Filter styleClass={"filter"} text={"Price Range"} />
-          <Filter styleClass={"filter-selected"} text={"Newest"} />
-        </div> */}
+            <Filter styleClass={"filter"} text={"Categories"} />
+            <Filter styleClass={"filter"} text={"Status"} />
+            <Filter styleClass={"filter"} text={"Price Range"} />
+            <Filter styleClass={"filter-selected"} text={"Newest"} />
+          </div> */}
         </div>
         <div className="nfts-grid">
-          {DUMMY_NFTs.map((nft) => (
+          {nftList.map((nft) => (
             <Card
-              nftId={1}
-              nftImage={nft.nftImage}
-              nftName={nft.nftName}
-              owner={nft.owner}
-              cryptoValue={nft.cryptoValue}
-              dollarValue={nft.dollarValue}
+              nftId={nft.tokenId}
+              nftImage={nft.meta.imageLink}
+              nftName={nft.meta.name}
+              owner={`0x${nft.creator[2]}${nft.creator[3]}${nft.creator[4]}....${nft.creator.slice(-4)}`}
+              cryptoValue={nft.price}
+              dollarValue={nft.price * 1214.16}
               uploadDate={nft.uploadDate}
             />
           ))}

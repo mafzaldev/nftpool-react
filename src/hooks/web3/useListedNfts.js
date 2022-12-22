@@ -1,16 +1,12 @@
-
 import { ethers } from "ethers";
 import { useCallback } from "react";
 import { toast } from "react-toastify";
 import useSWR from "swr";
 
 export const hookFactory = ({contract}) => () => {
-  const {data, ...swr} = useSWR(
-    contract ? "web3/useListedNfts" : null,
-    async () => {
+  const getNfts = async () => {
       const nfts = [];
       const coreNfts = await contract?.getAllNftsOnSale();
-
       for (let i = 0; i < coreNfts.length; i++) {
         const item = coreNfts[i];
         const tokenURI = await contract?.tokenURI(item.tokenId);
@@ -25,10 +21,8 @@ export const hookFactory = ({contract}) => () => {
           meta
         })
       }
-      
       return nfts;
     }
-  )
 
   const _contract = contract;
   const buyNft = useCallback(async (tokenId, value) => {
@@ -53,8 +47,8 @@ export const hookFactory = ({contract}) => () => {
 
 
   return {
-    ...swr,
+    getNfts,
     buyNft,
-    data: data || [],
+    contract
   };
 }

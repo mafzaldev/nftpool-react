@@ -11,6 +11,7 @@ export default function Card({
   owner,
   cryptoValue,
   dollarValue,
+  buyFunction
 }) {
   let navigate = useNavigate();
   const bg = {
@@ -37,7 +38,7 @@ export default function Card({
           </div>
           <div className="card-buttons">
             <div className="bid">
-              <Button text={"Place A bid"} width="120px" />
+              <Button text={"Place A bid"} width="120px" onClick={buyFunction}/>
             </div>
             <div className="artwork">
               <Button text={"View Artwork"} width="120px" />

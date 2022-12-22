@@ -130,6 +130,7 @@ contract NftMarketplace is ERC721URIStorage, Ownable {
 
         return newTokenId;
     }
+    
 
     function buyNft(uint tokenId) public payable {
         uint price = _idToNftItem[tokenId].price;
@@ -250,8 +251,8 @@ contract NftMarketplace is ERC721URIStorage, Ownable {
         _allTransactions.push(transaction);
     }
     // function to return all transactions in an array
-    function getTransactions() public view returns (Transaction[] memory) {
-        return _allTransactions;
+    function getTransactions() public view returns (uint) {
+        return _listedItems.current();
     }
     
 }

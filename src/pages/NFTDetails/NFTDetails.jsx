@@ -6,6 +6,7 @@ import bgImage001 from "../../assets/BGs/BG004.png";
 import "./NFTDetails.css";
 
 const NFTDetails = () => {
+  const { contract, getNfts, buyNft } = nfts;
   return (
     <>
       <Navbar />
