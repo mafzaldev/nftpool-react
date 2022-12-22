@@ -6,7 +6,7 @@ import Main from "../../assets/SVGs/main.svg";
 import "./Home.css";
 import { useNavigate } from "react-router-dom";
 const Home = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   return (
     <>
       <Navbar />
@@ -20,15 +20,10 @@ const Home = () => {
           </p>
           <div className="cra">
             <Button
-              text={"Start Collecting -->"}
-              width={"300px"}
-              height={"70px"}
-            />
-            <Button
               text={"Create NFTs -->"}
               width={"300px"}
               height={"70px"}
-              onClick={()=>{
+              onClick={() => {
                 navigate("/createNft");
               }}
             />

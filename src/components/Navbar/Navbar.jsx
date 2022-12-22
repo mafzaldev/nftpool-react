@@ -14,12 +14,10 @@ import { signoutUser } from "../../store/user/userSlice";
 import Walletbar from "../WalletBar/WalletBar";
 import { useAccount, useNetwork } from "../../hooks/web3";
 
-
-
 const Navbar = () => {
-  const user = useSelector(state => state.user.user)
-  const dispatch = useDispatch()
-  const navigate = useNavigate()
+  const user = useSelector((state) => state.user.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { account } = useAccount();
   const { network } = useNetwork();
 
@@ -40,33 +38,32 @@ const Navbar = () => {
         <img src={Nav} alt="" className="ham" />
         <img src={Close} alt="" className="close" />
       </label>
-      {
-        (!user?.uid || !auth?.currentUser) ?
-          (
-            <div className="register">
-              <NavLink to="/signup">
-                <Button text={"Register"} width={"150px"} height={"50px"} />
-              </NavLink>
-            </div>
-          ) : (
-            <div className="register">
-              <NavLink to="/profile">
-                <img className="img-profile" src={user?.photoURL}>
-                </img>
-              </NavLink>
-              <Button text={"Logout"} onClick={() => {
-                dispatch(signoutUser())
-                navigate('/signin');
-              }} width={"150px"} height={"50px"} />
-            </div>
-          )
-      }
+      {!user?.uid || !auth?.currentUser ? (
+        <div className="register">
+          <NavLink to="/signup">
+            <Button text={"Register"} width={"150px"} height={"50px"} />
+          </NavLink>
+        </div>
+      ) : (
+        <div className="register">
+          <Button
+            text={"Logout"}
+            onClick={() => {
+              dispatch(signoutUser());
+              navigate("/signin");
+            }}
+            width={"150px"}
+            height={"50px"}
+          />
+        </div>
+      )}
       <Walletbar
         isInstalled={account.isInstalled}
         isLoading={account.isLoading}
         connect={account.connect}
         account={account.data}
-      /> 
+        avatar={user?.photoURL}
+      />
     </nav>
   );
 };
