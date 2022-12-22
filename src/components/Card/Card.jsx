@@ -2,6 +2,8 @@ import React from "react";
 import Button from "../Button/Button";
 import { useNavigate } from "react-router-dom";
 import "./Card.css";
+import { update } from "../../store/nft";
+import { useDispatch } from "react-redux";
 
 export default function Card({
   nftId,
@@ -19,9 +21,9 @@ export default function Card({
     backgroundRepeat: "no-repeat",
     backgroundSize: "cover",
   };
-
+  const dispatch = useDispatch();
   return (
-    <div className="card" style={bg} onClick={() => navigate(`/nft/${nftId}`)}>
+    <div className="card" style={bg}>
       <div className="upload">{uploadDate}</div>
 
       <div className="blurred">
@@ -41,7 +43,19 @@ export default function Card({
               <Button text={"Place A bid"} width="120px" onClick={buyFunction}/>
             </div>
             <div className="artwork">
-              <Button text={"View Artwork"} width="120px" />
+              <Button text={"View Artwork"} width="120px"   onClick={() => {
+                dispatch(update({
+                  nftId: nftId,
+                  nftImage: nftImage,
+                  uploadDate: uploadDate,
+                  nftName: nftName,
+                  owner: owner,
+                  cryptoValue: cryptoValue,
+                  dollarValue: dollarValue
+                }))
+                navigate(`/nft/${nftId}`)
+                
+                }}/>
             </div>
           </div>
         </div>

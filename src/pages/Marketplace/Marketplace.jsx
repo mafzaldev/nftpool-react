@@ -50,7 +50,10 @@ export default function Marketplace() {
               owner={`0x${nft.creator[2]}${nft.creator[3]}${nft.creator[4]}....${nft.creator.slice(-4)}`}
               cryptoValue={nft.price}
               dollarValue={nft.price * 1214.16}
-              uploadDate={nft.uploadDate}
+              uploadDate={nft.meta.createdAt}
+              buyFunction={()=>{
+                buyNft(nft.tokenId, nft.price);
+              }}
             />
           ))}
         </div>

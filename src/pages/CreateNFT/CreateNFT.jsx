@@ -10,8 +10,9 @@ import { NavLink } from 'react-router-dom';
 import { v4 as uuidv4 } from "uuid";
 import { NFTStorage } from 'nft.storage'
 import { nftStorageSecretApiKey, contractAddress } from "../../api/utils";
+import { useNavigate } from "react-router-dom";
 
-const ALLOWED_FIELDS = ["name", "description", "imageLink", "image"];
+const ALLOWED_FIELDS = ["name", "description", "imageLink", "image", "createdAt"];
 
 const CreateNFT = () => {
   const { ethereum, contract } = useWeb3();
@@ -23,7 +24,8 @@ const CreateNFT = () => {
     name: "",
     description: "",
     imageLink: "",
-    image: null
+    image: null,
+    createdAt: ""
   });
   const client = new NFTStorage({ token: nftStorageSecretApiKey });
 
@@ -31,7 +33,7 @@ const CreateNFT = () => {
     const messageToSign = { contractAddress, id: uuidv4() };
     const accounts = await ethereum?.request({method: "eth_requestAccounts"});
     const account = accounts[0];
-
+    const navigate = useNavigate();
     const signedData = await ethereum?.request({
       method: "personal_sign",
       params: [
@@ -55,7 +57,8 @@ const CreateNFT = () => {
       setNftMeta({
         ...nftMeta,
         imageLink: `https://${ipfsHash}.ipfs.nftstorage.link`,
-        image: file
+        image: file,
+        createdAt: Date.now().toLocaleString()
       });
   };
   const handleChange = (e) => {
@@ -74,10 +77,8 @@ const CreateNFT = () => {
         success: "Metadata uploaded",
         error: "Metadata upload error",
       });
-      console.log(data)
 
       setNftURI(`https://nftstorage.link/ipfs/${data.ipnft}/metadata.json`);
-      console.log(nftURI)
     } catch (e) {
       console.error(e.message);
     }
@@ -104,6 +105,7 @@ const CreateNFT = () => {
         success: "Nft has ben created",
         error: "Minting error",
       });
+      navigate("/marketplace");
     } catch (e) {
       console.error(e.message);
     }
