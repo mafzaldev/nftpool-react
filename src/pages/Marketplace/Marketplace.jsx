@@ -44,10 +44,11 @@ export default function Marketplace() {
         <div className="nfts-grid">
           {nftList.map((nft) => (
             <Card
+              key={nft.tokenId}
               nftId={nft.tokenId}
               nftImage={nft.meta.imageLink}
               nftName={nft.meta.name}
-              owner={`0x${nft.creator[2]}${nft.creator[3]}${nft.creator[4]}....${nft.creator.slice(-4)}`}
+              owner={nft.creator}
               cryptoValue={nft.price}
               dollarValue={nft.price * 1214.16}
               uploadDate={nft.meta.createdAt}

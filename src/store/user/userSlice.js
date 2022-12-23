@@ -16,11 +16,10 @@ const initialState = {
 export const fetchUser = createAsyncThunk(
   "user/fetchUser",
   async (userInfo) => {
-    console.log({ response: response.data[0], userInfo });
+    console.log("hehehe")
     if (userInfo.uid == null) {
       return null;
     }
-    console.log({ response: response.data[0], userInfo });
     const response = await axios.get("http://localhost:3000/user", {
       params: { uid: userInfo.uid },
     });

@@ -1,6 +1,7 @@
 import { createContext, useContext, useEffect, useState } from "react"
 import { createDefaultState, createWeb3State, loadContract } from "./utils";
 import { ethers } from "ethers";
+import { auth } from "../../../firebase";
 
 const pageReload = () => { window.location.reload(); }
 
@@ -49,8 +50,9 @@ const Web3Provider = ({children}) => {
     }
 
     initWeb3();
+    console.log("GG")
     return () => removeGlobalListeners(window.ethereum);
-  }, [])
+  }, [auth])
 
   return (
     <Web3Context.Provider value={web3Api}>

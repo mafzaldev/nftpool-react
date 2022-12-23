@@ -41,7 +41,7 @@ const CreateNFT = () => {
     const messageToSign = { contractAddress, id: uuidv4() };
     const accounts = await ethereum?.request({ method: "eth_requestAccounts" });
     const account = accounts[0];
-    
+
     const signedData = await ethereum?.request({
       method: "personal_sign",
       params: [JSON.stringify(messageToSign), account, messageToSign.id],
@@ -58,12 +58,12 @@ const CreateNFT = () => {
     await getSignedData();
     const file = e.target.files[0];
     const ipfsHash = await client.storeBlob(file);
-      setNftMeta({
-        ...nftMeta,
-        imageLink: `https://${ipfsHash}.ipfs.nftstorage.link`,
-        image: file,
-        createdAt: new Date().toISOString().slice(0, 10)
-      });
+    setNftMeta({
+      ...nftMeta,
+      imageLink: `https://${ipfsHash}.ipfs.nftstorage.link`,
+      image: file,
+      createdAt: new Date().getTime()
+    });
   };
   const handleChange = (e) => {
     const { name, value } = e.target;

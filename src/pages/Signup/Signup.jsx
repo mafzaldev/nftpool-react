@@ -1,9 +1,9 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
+import { createUserWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../../../firebase";
+import { auth, facebookProvider, googleProvider } from "../../../firebase";
 import Button from "../../components/Button/Button";
 import Modal from "../../components/Modal/Modal";
 import { addUser } from "../../store/user/userSlice";
@@ -23,7 +23,15 @@ const Signup = () => {
   const handleModal = () => {
     setModalOpen((prev) => !prev);
   };
-
+  const signIn = (provider) => {
+    signInWithPopup(auth, provider)
+      .catch(alert)
+      .then((result) => {
+        setUid(result.user.uid);
+        handleModal();
+      });
+      
+  };
   const handleChange = (e) => {
     const name = e.target.name;
     const value = e.target.value;
@@ -96,8 +104,8 @@ const Signup = () => {
           <div className="other-options">
             <span>or continue with</span>
             <div>
-              <a href="">Google</a>
-              <a href="">Facebook</a>
+          <Button onClick={() => signIn(googleProvider)} text="Google" />
+          <Button onClick={() => signIn(facebookProvider)} text="Facebook" />
             </div>
           </div>
         </div>

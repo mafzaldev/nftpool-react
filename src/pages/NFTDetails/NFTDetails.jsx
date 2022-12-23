@@ -1,22 +1,10 @@
 import React from "react";
-import { useParams } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import Footer from "../../components/Footer/Footer";
-import bgImage001 from "../../assets/BGs/BG004.png";
 import "./NFTDetails.css";
 import { useSelector } from "react-redux";
 
-const NFTDetails = ({
-  nftId,
-  nftImage,
-  uploadDate,
-  nftName,
-  owner,
-  cryptoValue,
-  dollarValue,
-  buyFunction,
-  description
-}) => {
+const NFTDetails = () => {
   const nft = useSelector(state => state.nft)
   return (
     <>
@@ -43,14 +31,14 @@ const NFTDetails = ({
               </div>
               <div className="details-info__dollar">
                 <h4>Dollar Value</h4>
-                <p>{nft.dollarValue.toLocaleString('en-US', {
+                <p>{(nft.dollarValue).toLocaleString('en-US', {
                   style: 'currency',
                   currency: 'USD',
                 })}</p>
               </div>
               <div className="details-info__upload">
                 <h4>Upload Date</h4>
-                <p>{nft.uploadDate}</p>
+                <p>{new Date(parseInt(nft.uploadDate) * 1000).toLocaleDateString()}</p>
               </div>
             </div>
           </div>

@@ -26,23 +26,25 @@ export default function Card({
   const dispatch = useDispatch();
   return (
     <div className="card" style={bg} >
-      <div className="upload">{uploadDate}</div>
-
+      <div className="upload">{new Date(parseInt(uploadDate) * 1000).toLocaleDateString()}</div>
       <div className="blurred">
         <div>
           <div className="nft-details">
             <div className="introd">
               <p className="nft-name">{nftName}</p>
-              <p className="underlined">{owner}</p>
+              <p className="underlined">{`0x${owner[2]}${owner[3]}${owner[4]}....${owner.slice(-4)}`}</p>
             </div>
             <div className="price">
-              <p className="crypto">{cryptoValue}</p>
-              <p className="dollars">{dollarValue}</p>
+              <p className="crypto">{cryptoValue} ETH</p>
+              <p className="dollars">{(dollarValue).toLocaleString('en-US', {
+                  style: 'currency',
+                  currency: 'USD',
+                })}</p>
             </div>
           </div>
           <div className="card-buttons">
             <div className="bid">
-              <Button text={"Place A bid"} width="120px" onClick={buyFunction}/>
+              <Button text={"Purchase"} width="120px" onClick={buyFunction}/>
             </div>
             <div className="artwork">
               <Button text={"View Artwork"} width="120px"   onClick={() => {
@@ -56,7 +58,7 @@ export default function Card({
                   dollarValue: dollarValue,
                   description: description
                 }))
-                navigate(`/nft/${nftId}`)
+                navigate(`/nft/${nftName}`)
                 
                 }}/>
             </div>

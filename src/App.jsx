@@ -20,26 +20,35 @@ import { getAuth, onAuthStateChanged } from "firebase/auth";
 import Auction from "./pages/Auction/auction";
 import Required_form from "./components/form/Required_form";
 import CreateNFT from "./pages/CreateNFT/CreateNFT";
+import { useAuthState } from "react-firebase-hooks/auth";
+import ReactLoading from "react-loading";
 
 function App() {
-  const user = useSelector((state) => state.user.user);
   const state = useSelector((state) => state);
   console.log(state);
   const dispatch = useDispatch();
+  const [user, loading] = useAuthState(auth);
   useEffect(() => {
-    window.process = {
-      ...window.process,
-    };
     onAuthStateChanged(auth, (user) => {
       if (user) {
         dispatch(fetchUser({ uid: user.uid, photoURL: user.photoURL }));
       }
     });
   }, [auth]);
+  if (loading) {
+    return <div style={{
+      display: 'flex',
+      height: '100vh',
+      alignItems: 'center',
+      justifyContent: 'center',
+    }}>
+      <ReactLoading type="spin" color="#FFFFFF" height={'25%'} width={'25%'} />
+    </div>
+  }
   return (
     <>
       <Router>
-        {user?.uid ? (
+        {user ? (
           <Routes>
             <Route path="/" element={<Home />}></Route>
             <Route path="/profile" element={<Profile />}></Route>
